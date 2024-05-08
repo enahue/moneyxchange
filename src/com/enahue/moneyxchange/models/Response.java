@@ -9,4 +9,8 @@ public record Response(Map<String, Double> conversion_rates) {
         List<String> abbreviations = new ArrayList<>(conversion_rates.keySet());
         return abbreviations;
     }
+    public double getExchangeRate(String currencyCode) {
+        return conversion_rates.getOrDefault(currencyCode, 0.0);
+    }
+
 }

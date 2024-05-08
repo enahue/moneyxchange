@@ -2,6 +2,7 @@ package com.enahue.moneyxchange.main;
 
 import com.enahue.moneyxchange.api.ExchangeRateAPI;
 import com.enahue.moneyxchange.models.Response;
+import com.enahue.moneyxchange.calculation.Conversor;
 
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Iniciando la aplicación..");
         Scanner sc = new Scanner(System.in);
+        Conversor conversor = new Conversor();
 
         while (true) {
             System.out.println("*******************************************");
@@ -29,15 +31,17 @@ public class Main {
                     """;
             System.out.println(menu);
             var currencyCode = sc.nextLine();
-            if (currencyCode.equalsIgnoreCase("7")) {
+            if (currencyCode.equalsIgnoreCase("8")) {
                 break;
             }
             try {
                 ExchangeRateAPI query = new ExchangeRateAPI();
                 Response response = query.getCurrencyAbbreviations(currencyCode);
 
-
-                System.out.println(response);
+                System.out.println("Ingrese la cantidad que desea convertir:");
+                double amount = sc.nextDouble();
+                double convertedAmount = conversor.convert(amount, response.getExchangeRate("USD"));
+                System.out.println("La cantidad convertida es: " + convertedAmount);
 
             } catch (NumberFormatException e) {
                 System.out.println("Solo se aceptan numeros (" + e.getMessage() + ")");
