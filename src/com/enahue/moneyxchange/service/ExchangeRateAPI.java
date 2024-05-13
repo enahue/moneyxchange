@@ -1,6 +1,6 @@
-package com.enahue.moneyxchange.api;
+package com.enahue.moneyxchange.service;
 
-import com.enahue.moneyxchange.models.Response;
+import com.enahue.moneyxchange.model.Response;
 import com.google.gson.Gson;
 
 import java.net.URI;

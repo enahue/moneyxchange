@@ -1,8 +1,8 @@
 package com.enahue.moneyxchange.main;
 
-import com.enahue.moneyxchange.api.ExchangeRateAPI;
-import com.enahue.moneyxchange.models.Response;
-import com.enahue.moneyxchange.calculation.Conversor;
+import com.enahue.moneyxchange.service.ExchangeRateAPI;
+import com.enahue.moneyxchange.model.Response;
+import com.enahue.moneyxchange.service.Conversor;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.enahue.moneyxchange.models;
+package com.enahue.moneyxchange.model;
 
 import java.util.ArrayList;
 import java.util.List;
