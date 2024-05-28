@@ -1,4 +1,4 @@
-package com.enahue.moneyxchange.service;
+package com.enahue.moneyxchange.currency;
 
 public class Conversor {
 

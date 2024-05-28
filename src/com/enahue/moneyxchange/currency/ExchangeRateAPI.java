@@ -1,7 +1,8 @@
-package com.enahue.moneyxchange.service;
+package com.enahue.moneyxchange.currency;
 
-import com.enahue.moneyxchange.model.Response; // Add this import
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.net.URI;
@@ -9,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+
 public class ExchangeRateAPI {
     private static final String API_KEY = "9b7dcef9058c31be20dbcaf4";
 
@@ -32,7 +34,9 @@ public class ExchangeRateAPI {
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return new Gson().fromJson(response.body(), new TypeToken<List<String>>() {
+            JsonObject jsonObject = new Gson().fromJson(response.body(), JsonObject.class);
+            JsonArray jsonArray = jsonObject.getAsJsonArray("data.supported_codes");
+            return new Gson().fromJson(jsonArray, new TypeToken<List<String>>() {
             }.getType());
         } catch (Exception e) {
             throw new RuntimeException("Error while calling API", e);

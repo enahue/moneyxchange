@@ -1,11 +1,14 @@
 package com.enahue.moneyxchange;
 
+import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.List;
 
-import com.enahue.moneyxchange.service.Conversor;
-import com.enahue.moneyxchange.service.ExchangeRateAPI;
-import com.enahue.moneyxchange.model.Response;
+import com.enahue.moneyxchange.currency.Conversor;
+import com.enahue.moneyxchange.currency.ExchangeRateAPI;
+import com.enahue.moneyxchange.currency.Response;
+
+import static com.enahue.moneyxchange.ReadJson.readJsonFile;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,12 +26,17 @@ public class Main {
             option = scanner.nextInt();
             switch (option) {
                 case 1:
-                    List<String> currencies = api.getAvailableCurrencies();
-                    System.out.println("Divisas disponibles:");
-                    for (String currency : currencies) {
-                        System.out.println(currency);
+                    Map<String, String> currentsList = null;
+                    try {
+                        currentsList = readJsonFile("currents.json");
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
+                    if (currentsList != null) {
+                        for (Map.Entry<String, String> entry : currentsList.entrySet()) {
+                            System.out.println(entry.getKey() + ": " + entry.getValue());
+                        }
+                    }
                     break;
                 case 2:
                     System.out.println("Ingresa el código de la moneda desde la que quieres convertir (por ejemplo, USD):");

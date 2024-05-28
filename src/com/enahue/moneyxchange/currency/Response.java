@@ -1,4 +1,4 @@
-package com.enahue.moneyxchange.model;
+package com.enahue.moneyxchange.currency;
 
 import java.util.Map;
 
